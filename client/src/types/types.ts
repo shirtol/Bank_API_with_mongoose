@@ -1,7 +1,7 @@
 export interface User {
     userId: string;
     userName: string;
-    accounts: string[];
+    accounts: Account[];
 }
 
 export interface Account {
