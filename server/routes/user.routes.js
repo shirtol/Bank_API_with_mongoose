@@ -42,11 +42,11 @@ route.post("/users", async (req, res) => {
     }
 });
 
-route.put("/user/cash/deposit", (req, res) => {
+route.put("/user/cash/deposit", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        depositCash(req.body, userId);
-        res.status(200).json(getUserData(userId));
+        await depositCash(req.body, userId);
+        res.status(200).json(await getUserData(userId));
     } catch (err) {
         res.status(404).send(err.message);
     }

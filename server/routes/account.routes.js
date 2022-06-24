@@ -8,7 +8,6 @@ export const route = express.Router();
 
 route.put("/account/is-active", (req, res) => {
     try {
-        console.log(req.body);
         isBoolOrThrow(req.body.isActive);
         const account = updateAccountIsActive(req.body);
         res.status(200).json(account);

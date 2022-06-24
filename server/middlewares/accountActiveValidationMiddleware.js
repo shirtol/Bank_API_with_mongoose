@@ -1,11 +1,11 @@
 import { getAccount } from "../utils/accountUtils.js";
 
-export const accountActiveValidation = (req, res, next) => {
+export const accountActiveValidation = async (req, res, next) => {
     // const isActive = req?.body?.isActive;
     const accountId = req?.body?.accountId;
     const destinationAccountId = req?.body?.destinationAccountId;
-    const account = getAccount(accountId);
-    const destAccount = getAccount(destinationAccountId);
+    const account = await getAccount(accountId);
+    const destAccount = await getAccount(destinationAccountId);
     if (account) {
         if (!account.isActive) {
             throw Error("Account isn't active");

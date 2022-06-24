@@ -66,10 +66,14 @@ export const addNewUser = async ({ name }) => {
     return { savedUser, savedAccount };
 };
 
-export const depositCash = ({ accountId, amount }, userId) => {
-    const { id } = getRequestedAccount(userId, accountId);
-    const newAccountsArr = updateAccounts(id, amount);
-    saveToJson("accounts.json", newAccountsArr);
+export const depositCash = async ({ accountId, amount }, userId) => {
+    const { _id } = await getRequestedAccount(userId, accountId);
+    const updatedAccount = await Account.findByIdAndUpdate(
+        { _id },
+        { $inc: { cash: amount } },
+        { new: true }
+    );
+    return updatedAccount;
 };
 
 const getMoneyAmount = (accountId, fromWhereToWithdraw) => {

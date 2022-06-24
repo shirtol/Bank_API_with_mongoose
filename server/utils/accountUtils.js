@@ -5,11 +5,11 @@ import {
 } from "../utils/jsonUtils.js";
 import { getUserData } from "../controllers/userController.js";
 import { UPDATE_TYPE_CASH } from "../consts.js";
+import { Account } from "../models/account/Account.models.js";
 
-export const getAccount = (accountId) => {
-    const { accounts } = getUsersAndAccountsJson();
-
-    return accounts.find((account) => account.id === accountId);
+export const getAccount = async (accountId) => {
+    const account = await Account.findById(accountId);
+    return account;
 };
 
 export const updateAccounts = (
@@ -30,17 +30,19 @@ export const updateAccounts = (
     return newAccountsArr;
 };
 
-export const getRequestedAccount = (userId, accountId) => {
-    const accountFromAllAccounts = getAccount(accountId);
-    const user = getUserData(userId);
+export const getRequestedAccount = async (userId, accountId) => {
+    const accountFromAllAccounts = await getAccount(accountId);
+    const user = await getUserData(userId);
 
-    return user.accounts.find(
-        (account) => account.id === accountFromAllAccounts?.id
+    const accountFromUser = user.accounts.find(
+        (account) =>
+            account._id.toString() === accountFromAllAccounts?._id.toString()
     );
+    return accountFromUser;
 };
 
-export const checkAccountExistOrThrow = (accountId) => {
-    const account = getAccount(accountId);
+export const checkAccountExistOrThrow = async (accountId) => {
+    const account = await getAccount(accountId);
     if (!account) {
         throw Error("Destination account doesn't exist");
     }
@@ -49,7 +51,6 @@ export const checkAccountExistOrThrow = (accountId) => {
 
 export const updateAccountIsActive = ({ accountId, isActive }) => {
     const { accounts } = getUsersAndAccountsJson();
-    console.log(isActive);
     let selectedAccount = undefined;
     const newAccountsArr = accounts.map((account) => {
         if (account.id === accountId) {
