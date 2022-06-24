@@ -23,7 +23,6 @@ export const getUserData = async (id) => {
             return account;
         })
     );
-    console.log(userAccountsData);
     const userData = {
         userId: requestedUser._id,
         userName: requestedUser.name,
@@ -43,13 +42,10 @@ export const getAllUsers = async () => {
         })
     );
 
-    console.log(usersData);
-
     return usersData;
 };
 
 const createNewAccount = (newUserId) => {
-    console.log(newUserId);
     return {
         cash: 0,
         credit: 0,
@@ -65,12 +61,8 @@ export const addNewUser = async ({ name }) => {
     const newAccount = new Account(createNewAccount(newUser._id));
     newUser.accounts.push(newAccount._id);
     const savedAccount = await newAccount.save();
-    // const updateUserAccount = await User.findByIdAndUpdate(
-    //     { _id: savedUser["_id"] },
-    //     { accounts: [savedAccount["_id"]] },
-    //     { new: true }
-    // );
     const savedUser = await newUser.save();
+
     return { savedUser, savedAccount };
 };
 
