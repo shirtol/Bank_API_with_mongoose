@@ -13,19 +13,19 @@ import { getAccount } from "../utils/accountUtils.js";
 
 export const route = express.Router();
 
-route.get("/users", (req, res) => {
+route.get("/users", async (req, res) => {
     try {
-        const allUsers = getAllUsers();
+        const allUsers = await getAllUsers();
         res.status(200).json(allUsers);
     } catch (err) {
         res.status(400).send(err.message);
     }
 });
 
-route.get("/user", (req, res) => {
+route.get("/user", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        const userData = getUserData(userId);
+        const userData = await getUserData(userId);
         res.status(200).json(userData);
     } catch (err) {
         res.status(404).send(err.message);

@@ -17,11 +17,15 @@ import mongoose from "mongoose";
 export const getUserData = async (id) => {
     const requestedUser = await User.findById(id);
     if (!requestedUser) return null;
-    const userAccountsData = requestedUser.accounts.map((accountId) => {
-        return Account.findById(accountId);
-    });
+    const userAccountsData = await Promise.all(
+        requestedUser.accounts.map(async (accountId) => {
+            const account = await Account.findById(accountId);
+            return account;
+        })
+    );
+    console.log(userAccountsData);
     const userData = {
-        userId: requestedUser.id,
+        userId: requestedUser._id,
         userName: requestedUser.name,
         accounts: userAccountsData,
     };
@@ -32,7 +36,16 @@ export const getUserData = async (id) => {
 export const getAllUsers = async () => {
     const users = await User.find();
 
-    return users.map(async (user) => await getUserData(user.id));
+    const usersData = await Promise.all(
+        users.map(async (user) => {
+            const userData = await getUserData(user._id);
+            return userData;
+        })
+    );
+
+    console.log(usersData);
+
+    return usersData;
 };
 
 const createNewAccount = (newUserId) => {
