@@ -12,22 +12,20 @@ export const getAccount = async (accountId) => {
     return account;
 };
 
-export const updateAccounts = (
+export const updateAccounts = async (
     accountId,
     amountOfMoney,
     fromWhere = UPDATE_TYPE_CASH,
     accountsArr
 ) => {
-    const accounts = accountsArr ?? loadJson("accounts.json");
-    const newAccountsArr = accounts.map((account) => {
-        if (account.id === accountId) {
-            account[fromWhere] += amountOfMoney;
-        }
+    const accounts = accountsArr ?? (await Account.find());
+    const updatedAccount = await Account.findByIdAndUpdate(
+        { _id: accountId },
+        { $inc: { [fromWhere]: amountOfMoney } },
+        { new: true }
+    );
 
-        return account;
-    });
-
-    return newAccountsArr;
+    return updatedAccount;
 };
 
 export const getRequestedAccount = async (userId, accountId) => {

@@ -76,22 +76,27 @@ export const depositCash = async ({ accountId, amount }, userId) => {
     return updatedAccount;
 };
 
-const getMoneyAmount = (accountId, fromWhereToWithdraw) => {
-    const accounts = loadJson("accounts.json");
-    const accountData = accounts.find((account) => account.id === accountId);
+const getMoneyAmount = async (accountId, fromWhereToWithdraw) => {
+    const account = await Account.findById(accountId);
 
-    return accountData[fromWhereToWithdraw];
+    return account[fromWhereToWithdraw];
 };
 
-export const withdrawMoney = (
+export const withdrawMoney = async (
     { accountId, amount },
     userId,
     fromWhereToWithdraw
 ) => {
-    const { id } = getRequestedAccount(userId, accountId);
-    checkUserBalanceOrThrow(id, fromWhereToWithdraw, amount);
-    const newAccountsArr = updateAccounts(id, amount * -1, fromWhereToWithdraw);
-    saveToJson("accounts.json", newAccountsArr);
+    const { _id } = await getRequestedAccount(userId, accountId);
+    console.log(_id);
+    await checkUserBalanceOrThrow(_id, fromWhereToWithdraw, amount);
+    const updatedAccount = await updateAccounts(
+        _id,
+        amount * -1,
+        fromWhereToWithdraw
+    );
+    console.log(updatedAccount);
+    return updatedAccount;
 };
 
 export const updateCredit = ({ accountId, amount }, userId) => {
@@ -100,8 +105,12 @@ export const updateCredit = ({ accountId, amount }, userId) => {
     saveToJson("accounts.json", newAccountsArr);
 };
 
-const checkUserBalanceOrThrow = (withdrawAccountId, whereToUpdate, amount) => {
-    const totalMoney = getMoneyAmount(withdrawAccountId, whereToUpdate);
+const checkUserBalanceOrThrow = async (
+    withdrawAccountId,
+    whereToUpdate,
+    amount
+) => {
+    const totalMoney = await getMoneyAmount(withdrawAccountId, whereToUpdate);
     if (totalMoney - amount < 0) {
         throw Error(
             "Can't transfer money (The user can't getting into overdraft)"

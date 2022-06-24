@@ -52,21 +52,22 @@ route.put("/user/cash/deposit", async (req, res) => {
     }
 });
 
-route.put("/user/cash/withdraw", (req, res) => {
+route.put("/user/cash/withdraw", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        withdrawMoney(req.body, userId, UPDATE_TYPE_CASH);
-        res.status(200).json(getUserData(userId));
+        await withdrawMoney(req.body, userId, UPDATE_TYPE_CASH);
+        res.status(200).json(await getUserData(userId));
     } catch (err) {
         res.status(400).send(err.message);
     }
 });
 
-route.put("/user/credit/withdraw", (req, res) => {
+route.put("/user/credit/withdraw", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        withdrawMoney(req.body, userId, UPDATE_TYPE_CREDIT);
-        res.status(200).json(getUserData(userId));
+        console.log(userId);
+        await withdrawMoney(req.body, userId, UPDATE_TYPE_CREDIT);
+        res.status(200).json(await getUserData(userId));
     } catch (err) {
         res.status(400).send(err.message);
     }
