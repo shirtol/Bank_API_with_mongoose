@@ -65,7 +65,6 @@ route.put("/user/cash/withdraw", async (req, res) => {
 route.put("/user/credit/withdraw", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        console.log(userId);
         await withdrawMoney(req.body, userId, UPDATE_TYPE_CREDIT);
         res.status(200).json(await getUserData(userId));
     } catch (err) {
@@ -73,11 +72,11 @@ route.put("/user/credit/withdraw", async (req, res) => {
     }
 });
 
-route.put("/user/credit/update", (req, res) => {
+route.put("/user/credit/update", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        updateCredit(req.body, userId);
-        res.status(200).json(getUserData(userId));
+        await updateCredit(req.body, userId);
+        res.status(200).json(await getUserData(userId));
     } catch (err) {
         res.status(400).send(err.message);
     }

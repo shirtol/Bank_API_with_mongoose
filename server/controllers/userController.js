@@ -88,21 +88,23 @@ export const withdrawMoney = async (
     fromWhereToWithdraw
 ) => {
     const { _id } = await getRequestedAccount(userId, accountId);
-    console.log(_id);
     await checkUserBalanceOrThrow(_id, fromWhereToWithdraw, amount);
     const updatedAccount = await updateAccounts(
         _id,
         amount * -1,
         fromWhereToWithdraw
     );
-    console.log(updatedAccount);
     return updatedAccount;
 };
 
-export const updateCredit = ({ accountId, amount }, userId) => {
-    const { id } = getRequestedAccount(userId, accountId);
-    const newAccountsArr = updateAccounts(id, amount, UPDATE_TYPE_CREDIT);
-    saveToJson("accounts.json", newAccountsArr);
+export const updateCredit = async ({ accountId, amount }, userId) => {
+    const { _id } = await getRequestedAccount(userId, accountId);
+    const updatedAccount = await updateAccounts(
+        _id,
+        amount,
+        UPDATE_TYPE_CREDIT
+    );
+    return updatedAccount;
 };
 
 const checkUserBalanceOrThrow = async (
