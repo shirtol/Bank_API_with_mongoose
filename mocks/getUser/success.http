@@ -1,0 +1,3 @@
+GET /user HTTP/1.1
+Host: {{host}}
+user-id: 62b5a10776bf46a3ed6a6686

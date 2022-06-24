@@ -1,0 +1,11 @@
+PUT /user/credit/transfer HTTP/1.1
+Host: {{host}}
+Content-Type: application/json
+user-id: 62b5a10776bf46a3ed6a6686
+
+
+{ 
+"accountId": "62b5a10776bf46a3ed6a6687", 
+"destinationAccountId": "62b5aa7cd310d997d818a74b",
+"amount": 50
+}
