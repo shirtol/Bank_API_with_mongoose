@@ -8,7 +8,8 @@ export const accountActiveValidation = async (req, res, next) => {
     const destAccount = await getAccount(destinationAccountId);
     if (account) {
         if (!account.isActive) {
-            throw Error("Account isn't active");
+            return res.status(400).send("Account isn't active");
+            // throw Error("Account isn't active");
         }
     }
     if (destAccount) {
