@@ -1,11 +1,11 @@
 PUT /user/cash/transfer HTTP/1.1
 Host: {{host}}
 Content-Type: application/json
-user-id: 2114c44a6262d7438551bdbbc1aeb543d64f9e2503c90ca0c21409cc437c1111
+user-id: 62b5a10776bf46a3ed6a6686
 
 
 { 
-"accountId": "023bacfa-67d4-4451-bbf6-ea23cdd92e3b", 
-"destinationAccountId": "c595d8cc-9e6d-476f-a438-fc6926e1c242",
+"accountId": "62b5a10776bf46a3ed6a6687", 
+"destinationAccountId": "62b5aa7cd310d997d818a74b",
 "amount": 10
 }

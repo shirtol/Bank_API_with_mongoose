@@ -120,26 +120,25 @@ const checkUserBalanceOrThrow = async (
     }
 };
 
-export const transferMoney = (
+export const transferMoney = async (
     { accountId, destinationAccountId, amount },
     userId,
     whereToUpdate
 ) => {
-    const depositAccount = checkAccountExistOrThrow(destinationAccountId);
-    const withdrawAccount = getRequestedAccount(userId, accountId);
-    checkUserBalanceOrThrow(withdrawAccount.id, whereToUpdate, amount);
+    const depositAccount = await checkAccountExistOrThrow(destinationAccountId);
+    const withdrawAccount = await getRequestedAccount(userId, accountId);
+    await checkUserBalanceOrThrow(withdrawAccount.id, whereToUpdate, amount);
     //Withdraw
-    let updatedAccounts = updateAccounts(
-        withdrawAccount.id,
+    let updatedAccounts = await updateAccounts(
+        withdrawAccount._id,
         amount * -1,
         whereToUpdate
     );
     //Deposit
-    updatedAccounts = updateAccounts(
-        depositAccount.id,
+    updatedAccounts = await updateAccounts(
+        depositAccount._id,
         amount,
         UPDATE_TYPE_CASH,
         updatedAccounts
     );
-    saveToJson("accounts.json", updatedAccounts);
 };

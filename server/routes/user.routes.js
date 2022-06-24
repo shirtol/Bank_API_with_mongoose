@@ -82,26 +82,26 @@ route.put("/user/credit/update", async (req, res) => {
     }
 });
 
-route.put("/user/credit/transfer", (req, res) => {
+route.put("/user/credit/transfer", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        transferMoney(req.body, userId, UPDATE_TYPE_CREDIT);
+        await transferMoney(req.body, userId, UPDATE_TYPE_CREDIT);
         res.status(200).json([
-            getAccount(req.body.accountId),
-            getAccount(req.body.destinationAccountId),
+            await getAccount(req.body.accountId),
+            await getAccount(req.body.destinationAccountId),
         ]);
     } catch (err) {
         res.status(400).send(err.message);
     }
 });
 
-route.put("/user/cash/transfer", (req, res) => {
+route.put("/user/cash/transfer", async (req, res) => {
     try {
         const userId = req.headers["user-id"];
-        transferMoney(req.body, userId, UPDATE_TYPE_CASH);
+        await transferMoney(req.body, userId, UPDATE_TYPE_CASH);
         res.status(200).json([
-            getAccount(req.body.accountId),
-            getAccount(req.body.destinationAccountId),
+            await getAccount(req.body.accountId),
+            await getAccount(req.body.destinationAccountId),
         ]);
     } catch (err) {
         res.status(400).send(err.message);
