@@ -6,10 +6,10 @@ import { UPDATE_TYPE_CASH, UPDATE_TYPE_CREDIT } from "../consts.js";
 
 export const route = express.Router();
 
-route.put("/account/is-active", (req, res) => {
+route.put("/account/is-active", async (req, res) => {
     try {
         isBoolOrThrow(req.body.isActive);
-        const account = updateAccountIsActive(req.body);
+        const account = await updateAccountIsActive(req.body);
         res.status(200).json(account);
     } catch (err) {
         res.status(400).send(err.message);

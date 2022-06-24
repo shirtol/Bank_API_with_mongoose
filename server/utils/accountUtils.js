@@ -47,18 +47,12 @@ export const checkAccountExistOrThrow = async (accountId) => {
     return account;
 };
 
-export const updateAccountIsActive = ({ accountId, isActive }) => {
-    const { accounts } = getUsersAndAccountsJson();
-    let selectedAccount = undefined;
-    const newAccountsArr = accounts.map((account) => {
-        if (account.id === accountId) {
-            account.isActive = isActive;
-            selectedAccount = account;
-        }
+export const updateAccountIsActive = async ({ accountId, isActive }) => {
+    const updatedAccount = await Account.findByIdAndUpdate(
+        { _id: accountId },
+        { isActive },
+        { new: true }
+    );
 
-        return account;
-    });
-    saveToJson("accounts.json", newAccountsArr);
-
-    return selectedAccount;
+    return updatedAccount;
 };
