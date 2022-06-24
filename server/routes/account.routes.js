@@ -16,18 +16,24 @@ route.put("/account/is-active", async (req, res) => {
     }
 });
 
-route.get("/account/filter/cash", (req, res) => {
+route.get("/account/filter/cash", async (req, res) => {
     try {
-        const filteredAccounts = filterByAmount(req.body, UPDATE_TYPE_CASH);
+        const filteredAccounts = await filterByAmount(
+            req.body,
+            UPDATE_TYPE_CASH
+        );
         res.status(200).json(filteredAccounts);
     } catch (err) {
         res.status(400).send(err.message);
     }
 });
 
-route.get("/account/filter/credit", (req, res) => {
+route.get("/account/filter/credit", async (req, res) => {
     try {
-        const filteredAccounts = filterByAmount(req.body, UPDATE_TYPE_CREDIT);
+        const filteredAccounts = await filterByAmount(
+            req.body,
+            UPDATE_TYPE_CREDIT
+        );
         res.status(200).json(filteredAccounts);
     } catch (err) {
         res.status(400).send(err.message);

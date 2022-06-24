@@ -4,6 +4,6 @@ Content-Type: application/json
 
 
 { 
-"threshold": 700, 
+"threshold": 500, 
 "isAbove": true
 }

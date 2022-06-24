@@ -3,16 +3,15 @@ import { isNumberOrThrow, isBoolOrThrow } from "../utils/utils.js";
 import { Account } from "../models/account/Account.models.js";
 
 //isAbove=true: equal to or above/ below the threshold.
-export const filterByAmount = ({ threshold, isAbove }, filterBy) => {
+export const filterByAmount = async ({ threshold, isAbove }, filterBy) => {
     isNumberOrThrow(threshold);
     isBoolOrThrow(isAbove);
-    const { accounts } = getUsersAndAccountsJson();
-    const filteredAccounts = accounts.filter((account) => {
-        if (isAbove) {
-            return account[filterBy] >= threshold;
-        } else {
-            return account[filterBy] < threshold;
-        }
-    });
-    return filteredAccounts;
+    return isAbove
+        ? await Account.find({ [filterBy]: { $gte: threshold } })
+        : await Account.find({ [filterBy]: { $lt: threshold } });
+    // if (isAbove) {
+    //     return await Account.find({ [filterBy]: { $gte: threshold } });
+    // } else {
+    //     return await Account.find({ filterBy: { $lt: threshold } });
+    // }
 };
