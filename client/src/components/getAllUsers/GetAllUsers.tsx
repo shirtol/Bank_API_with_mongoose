@@ -4,7 +4,7 @@ import { User } from "../../types/types";
 import Button from "../button/Button";
 
 interface GetAllUsersProps {
-    setResults: (res: object) => void;
+    setResults: (res: User[]) => void;
 }
 
 const GetAllUsers = ({ setResults }: GetAllUsersProps) => {

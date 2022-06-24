@@ -14,7 +14,7 @@ export const StyledFlexWrapper = styled.div<StyledFlexWrapperProps>`
     justify-content: ${(props) => props.justifyContent ?? "space-around"};
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: max-content;
     overflow-y: ${(props) => props.overflowY ?? "visible"};
     margin-top: ${(props) => props.marginTop ?? "0"};
     & > * {
