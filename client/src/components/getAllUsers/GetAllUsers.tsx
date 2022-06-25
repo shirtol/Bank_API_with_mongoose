@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import { useBank } from "../../context/bank.context";
 import { getAllUsers } from "../../networkUtils/networkUtils";
-import { User } from "../../types/types";
 import Button from "../button/Button";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 

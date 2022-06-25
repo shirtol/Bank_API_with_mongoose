@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useBank } from "../../context/bank.context";
 import { changeAccountActiveState } from "../../networkUtils/networkUtils";
 import { Account } from "../../types/types";
@@ -15,13 +14,7 @@ const DisplayUserAccounts = ({
     userAccounts,
     userId,
 }: DisplayUserAccountsProps) => {
-    const [activateBtnTitle, setActivateBtnTitle] = useState("");
     const { setIsModalOpen } = useBank();
-
-    useEffect(() => {
-        const btnTitle = userAccounts[0].isActive ? "Deactivate" : "Activate";
-        setActivateBtnTitle(btnTitle);
-    }, []);
 
     const onActivateAccountClicked = async (account: Account) => {
         await changeAccountActiveState(userId, {
@@ -29,7 +22,6 @@ const DisplayUserAccounts = ({
             isActive: !account.isActive,
         });
         account.isActive = !account.isActive;
-
         setIsModalOpen(false);
     };
 

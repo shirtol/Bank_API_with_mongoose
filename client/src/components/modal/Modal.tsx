@@ -1,6 +1,4 @@
-import React from "react";
 import { useBank } from "../../context/bank.context";
-import { Account, User } from "../../types/types";
 import DisplayUserAccounts from "../displayUserAccounts/DisplayUserAccounts";
 import { StyledIcon } from "../styledIcon/StyledIcon";
 import { StyledModal } from "../styledModal/StyledModal";
