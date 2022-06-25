@@ -11,11 +11,18 @@ const DisplayUserAccounts = ({ userAccounts }: DisplayUserAccountsProps) => {
     const renderUserAccounts = () => {
         return userAccounts.map((account) => {
             return (
-                <StyledFlexWrapper>
-                    <StyledUserDetails></StyledUserDetails>
-                    <h2>Cash: {account.cash}</h2>
-                    <h2>Credit: {account.credit}</h2>
-                    <h2>Is Active: {account.isActive.toString()}</h2>
+                <StyledFlexWrapper flexDirection="column" key={account._id}>
+                    <StyledFlexWrapper flexDirection="column">
+                        <StyledUserDetails>Account:</StyledUserDetails>
+                        <StyledUserDetails>{account._id}</StyledUserDetails>
+                    </StyledFlexWrapper>
+                    <StyledUserDetails>Cash: {account.cash}</StyledUserDetails>
+                    <StyledUserDetails>
+                        Credit: {account.credit}
+                    </StyledUserDetails>
+                    <StyledUserDetails>
+                        Is Active: {account.isActive.toString()}
+                    </StyledUserDetails>
                 </StyledFlexWrapper>
             );
         });

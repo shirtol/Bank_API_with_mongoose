@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Account {
-    id: string;
+    _id: string;
     cash: number;
     credit: number;
     isActive: boolean;
