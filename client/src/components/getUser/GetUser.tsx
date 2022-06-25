@@ -7,9 +7,11 @@ import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
 interface GetUserProps {
     setResults: (res: User) => void;
+    // requestedResults: string[];
+    openInputBar: (reqInput: string[]) => void;
 }
 
-const GetUser = ({ setResults }: GetUserProps) => {
+const GetUser = ({ setResults, openInputBar }: GetUserProps) => {
     const fetchUser = async () => {
         // const user = await getUser(term);
         // setResults(user);
@@ -17,7 +19,10 @@ const GetUser = ({ setResults }: GetUserProps) => {
 
     return (
         <StyledFlexWrapper>
-            <Button onBtnClicked={fetchUser} title="get user"></Button>
+            <Button
+                onBtnClicked={() => openInputBar(["user id"])}
+                title="get user"
+            ></Button>
         </StyledFlexWrapper>
     );
 };
