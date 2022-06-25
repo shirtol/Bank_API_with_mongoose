@@ -5,14 +5,19 @@ import UserAccountCard from "../userAccountCard/UserAccountCard";
 
 interface DisplayResultsProps {
     currResult: User | User[] | undefined;
+    onUserCardClicked: () => void;
 }
 
-const DisplayResults = ({ currResult }: DisplayResultsProps) => {
+const DisplayResults = ({
+    currResult,
+    onUserCardClicked,
+}: DisplayResultsProps) => {
     const handleDisplay = () => {
         if (Array.isArray(currResult)) {
             return currResult.map((user) => {
                 return (
                     <UserAccountCard
+                        onUserCardClicked={onUserCardClicked}
                         user={user}
                         key={user.userId}
                     ></UserAccountCard>

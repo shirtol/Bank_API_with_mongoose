@@ -3,21 +3,23 @@ import { User } from "../../types/types";
 import DisplayUserAccounts from "../displayUserAccounts/DisplayUserAccounts";
 import { StyledUserDetails } from "../styledUserDetails/StyledUserDetails";
 import { StyledName } from "../styledName/StyledName";
+import { StyledCard } from "../styledCard/StyledCard";
 
 interface UserAccountCardProps {
     user: User;
+    onUserCardClicked: () => void;
 }
 
-const UserAccountCard = ({ user }: UserAccountCardProps) => {
+const UserAccountCard = ({ user, onUserCardClicked }: UserAccountCardProps) => {
     return (
-        <div>
+        <StyledCard onClick={onUserCardClicked}>
             <StyledName>{user.userName}</StyledName>
             <StyledUserDetails>{user.email}</StyledUserDetails>
             <StyledUserDetails>{user.phone}</StyledUserDetails>
             {/* <DisplayUserAccounts
                 userAccounts={user.accounts}
             ></DisplayUserAccounts> */}
-        </div>
+        </StyledCard>
     );
 };
 
