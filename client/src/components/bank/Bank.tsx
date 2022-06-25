@@ -14,6 +14,7 @@ import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
 import TransferMoneyCash from "../transferMoneyCash/TransferMoneyCash";
 import TransferMoneyCredit from "../transferMoneyCredit/TransferMoneyCredit";
+import UpdateCredit from "../updateCredit/UpdateCredit";
 import WithdrawCash from "../withdrawCash/WithdrawCash";
 import WithdrawCredit from "../withdrawCredit/WithdrawCredit";
 
@@ -36,7 +37,7 @@ const Bank = () => {
                 marginTop="2rem"
             >
                 <StyledGridWrapper
-                    gridTemplateCol="repeat(4, 1fr)"
+                    gridTemplateCol="repeat(3, 1fr)"
                     overflowY="visible"
                 >
                     <GetAllUsers></GetAllUsers>
@@ -47,6 +48,7 @@ const Bank = () => {
                     <TransferMoneyCash></TransferMoneyCash>
                     <TransferMoneyCredit></TransferMoneyCredit>
                     <AddUser></AddUser>
+                    <UpdateCredit></UpdateCredit>
                 </StyledGridWrapper>
 
                 {requestedData.length > 0 && (
@@ -58,7 +60,6 @@ const Bank = () => {
                 <StyledFlexWrapper
                     flexDirection="column"
                     justifyContent="flex-start"
-                    overflowY="scroll"
                 >
                     <DisplayResults
                         onUserCardClicked={onUserCardClicked}

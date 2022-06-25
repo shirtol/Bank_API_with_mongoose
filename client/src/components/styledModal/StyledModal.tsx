@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import device from "../../utils/mediaQuerySizes";
 
 interface StyledModalProps {
     children?: ReactNode;
@@ -36,5 +37,13 @@ export const StyledModal = styled.div<StyledModalProps>`
         background-color: #eec0c6;
         background-image: linear-gradient(315deg, #eec0c6 0%, #e58c8a 74%);
         border-radius: 4px;
+    }
+    @media ${device.tablet} {
+        width: 60%;
+        height: 45%;
+    }
+    @media ${device.mobileL} {
+        width: 70%;
+        height: 45%;
     }
 `;

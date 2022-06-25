@@ -39,3 +39,24 @@ export const fetchData = async (
 
     return data;
 };
+
+export interface ChangeAccountActiveReqBody {
+    accountId: string;
+    isActive: boolean;
+}
+
+export const changeAccountActiveState = async (
+    id: string,
+    reqBody: ChangeAccountActiveReqBody
+) => {
+    const { data } = await bankApi.request({
+        url: `/account/is-active`,
+        method: "put",
+        headers: { "user-id": id },
+        data: reqBody,
+    });
+
+    console.log(data);
+
+    return data;
+};

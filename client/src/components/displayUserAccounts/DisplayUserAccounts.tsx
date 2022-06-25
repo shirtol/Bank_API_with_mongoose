@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useBank } from "../../context/bank.context";
+import { changeAccountActiveState } from "../../networkUtils/networkUtils";
 import { Account } from "../../types/types";
+import Button from "../button/Button";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 import { StyledUserDetails } from "../styledUserDetails/StyledUserDetails";
 
 interface DisplayUserAccountsProps {
     userAccounts: Account[];
+    userId: string;
 }
 
-const DisplayUserAccounts = ({ userAccounts }: DisplayUserAccountsProps) => {
+const DisplayUserAccounts = ({
+    userAccounts,
+    userId,
+}: DisplayUserAccountsProps) => {
+    const [activateBtnTitle, setActivateBtnTitle] = useState("");
+    const { setIsModalOpen } = useBank();
+
+    useEffect(() => {
+        const btnTitle = userAccounts[0].isActive ? "Deactivate" : "Activate";
+        setActivateBtnTitle(btnTitle);
+    }, []);
+
+    const onActivateAccountClicked = async (account: Account) => {
+        await changeAccountActiveState(userId, {
+            accountId: account._id,
+            isActive: !account.isActive,
+        });
+        account.isActive = !account.isActive;
+
+        setIsModalOpen(false);
+    };
+
     const renderUserAccounts = () => {
         return userAccounts.map((account) => {
             return (
@@ -20,15 +45,21 @@ const DisplayUserAccounts = ({ userAccounts }: DisplayUserAccountsProps) => {
                     <StyledUserDetails>
                         Credit: {account.credit}
                     </StyledUserDetails>
-                    <StyledUserDetails>
-                        Is Active: {account.isActive.toString()}
-                    </StyledUserDetails>
+                    <Button
+                        onBtnClicked={() => onActivateAccountClicked(account)}
+                        title={account.isActive ? "Deactivate" : "Activate"}
+                        btnWidth="40% !important"
+                    ></Button>
                 </StyledFlexWrapper>
             );
         });
     };
 
-    return <div>{renderUserAccounts()}</div>;
+    return (
+        <StyledFlexWrapper flexDirection="column">
+            <div>{renderUserAccounts()}</div>
+        </StyledFlexWrapper>
+    );
 };
 
 export default DisplayUserAccounts;

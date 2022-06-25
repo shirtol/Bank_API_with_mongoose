@@ -3,6 +3,7 @@ import { useBank } from "../../context/bank.context";
 import { getAllUsers } from "../../networkUtils/networkUtils";
 import { User } from "../../types/types";
 import Button from "../button/Button";
+import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
 const GetAllUsers = () => {
     const { setCurrResult, setCurrEndpoint } = useBank();
@@ -15,7 +16,11 @@ const GetAllUsers = () => {
         setCurrEndpoint("/users");
     };
 
-    return <Button onBtnClicked={fetchAllUsers} title="get all users"></Button>;
+    return (
+        <StyledFlexWrapper>
+            <Button onBtnClicked={fetchAllUsers} title="get all users"></Button>
+        </StyledFlexWrapper>
+    );
 };
 
 export default GetAllUsers;
