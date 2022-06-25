@@ -22,6 +22,13 @@ const DisplayResults = ({ onUserCardClicked }: DisplayResultsProps) => {
                     ></UserAccountCard>
                 );
             });
+        } else {
+            return (
+                <UserAccountCard
+                    onUserCardClicked={onUserCardClicked}
+                    user={currResult}
+                ></UserAccountCard>
+            );
         }
     };
 

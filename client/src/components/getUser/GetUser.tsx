@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useBank } from "../../context/bank.context";
 import { getUser } from "../../networkUtils/networkUtils";
 import { User } from "../../types/types";
@@ -11,7 +11,12 @@ const GetUser = () => {
         // const user = await getUser(term);
         // setResults(user);
     };
-    const { setRequestedData, setCurrResult } = useBank();
+    const { setRequestedData, setCurrEndpoint, setCurrReqType } = useBank();
+
+    useEffect(() => {
+        setCurrEndpoint("/user");
+        setCurrReqType("get");
+    }, []);
 
     const openInputBar = (requestedInput: string[]) => {
         setRequestedData(requestedInput);

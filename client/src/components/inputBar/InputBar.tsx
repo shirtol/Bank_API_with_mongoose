@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useBank } from "../../context/bank.context";
+import { fetchData } from "../../networkUtils/networkUtils";
 import Button from "../button/Button";
 import { StyledInput } from "../input/StyledInput";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
@@ -15,7 +16,8 @@ export interface InputObj {
 }
 
 const InputBar = () => {
-    const { requestedData, currEndpoint, currReqType } = useBank();
+    const { requestedData, currEndpoint, currReqType, setCurrResult } =
+        useBank();
     const [inputBarTerms, setInputBarTerms] = useState<Partial<InputObj>>(
         requestedData!.reduce((acc: Partial<InputObj>, curr: string) => {
             return { ...acc, [curr]: "" };
@@ -26,7 +28,11 @@ const InputBar = () => {
         setInputBarTerms({ ...inputBarTerms, [inputStr]: value });
     };
 
-    const sendRequest = () => {};
+    const sendRequest = async () => {
+        const data = await fetchData(currEndpoint, currReqType, inputBarTerms);
+        setCurrResult(data);
+        console.log(data);
+    };
 
     const renderInputs = () => {
         return requestedData!.map((inputStr) => {

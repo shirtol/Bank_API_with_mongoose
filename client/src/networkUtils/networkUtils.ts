@@ -20,13 +20,13 @@ export const getUser = async (id: string): Promise<User> => {
 export const fetchData = async (
     endpoint: string,
     method: string,
-    reqBody: InputObj
+    reqBody: Partial<InputObj>
 ) => {
     const { data } = await bankApi.request({
         url: endpoint,
         method: method.toLowerCase(),
         headers: {
-            "user-id": reqBody["user id"],
+            "user-id": reqBody["user id"] ?? "",
         },
         data: reqBody,
     });
