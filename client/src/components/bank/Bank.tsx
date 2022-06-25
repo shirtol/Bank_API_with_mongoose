@@ -12,6 +12,7 @@ import ResultsView from "../resultsView/ResultsView";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
 import TransferMoneyCash from "../transferMoneyCash/TransferMoneyCash";
+import TransferMoneyCredit from "../transferMoneyCredit/TransferMoneyCredit";
 import WithdrawCash from "../withdrawCash/WithdrawCash";
 import WithdrawCredit from "../withdrawCredit/WithdrawCredit";
 
@@ -43,6 +44,7 @@ const Bank = () => {
                     <WithdrawCash></WithdrawCash>
                     <WithdrawCredit></WithdrawCredit>
                     <TransferMoneyCash></TransferMoneyCash>
+                    <TransferMoneyCredit></TransferMoneyCredit>
                 </StyledGridWrapper>
 
                 {requestedData.length > 0 && (
