@@ -22,13 +22,17 @@ export const fetchData = async (
     method: string,
     reqBody: Partial<InputObj>
 ) => {
+    const adaptedReqBody = {
+        ...reqBody,
+        amount: parseInt(reqBody.amount ?? "0"),
+    };
     const { data } = await bankApi.request({
         url: endpoint,
         method: method.toLowerCase(),
         headers: {
             "user-id": reqBody["user id"] ?? "",
         },
-        data: reqBody,
+        data: adaptedReqBody,
     });
 
     return data;
