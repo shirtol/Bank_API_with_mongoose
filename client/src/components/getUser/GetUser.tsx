@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import { useBank } from "../../context/bank.context";
 import { getUser } from "../../networkUtils/networkUtils";
 import { User } from "../../types/types";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-interface GetUserProps {
-    setResults: (res: User) => void;
-    // requestedResults: string[];
-    openInputBar: (reqInput: string[]) => void;
-}
-
-const GetUser = ({ setResults, openInputBar }: GetUserProps) => {
+const GetUser = () => {
     const fetchUser = async () => {
         // const user = await getUser(term);
         // setResults(user);
+    };
+    const { setRequestedData, setCurrResult } = useBank();
+
+    const openInputBar = (requestedInput: string[]) => {
+        setRequestedData(requestedInput);
     };
 
     return (

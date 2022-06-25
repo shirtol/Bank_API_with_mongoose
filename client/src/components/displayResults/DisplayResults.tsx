@@ -1,17 +1,16 @@
 import React from "react";
+import { useBank } from "../../context/bank.context";
 import { User } from "../../types/types";
 import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
 import UserAccountCard from "../userAccountCard/UserAccountCard";
 
 interface DisplayResultsProps {
-    currResult: User | User[] | undefined;
     onUserCardClicked: (user: User) => void;
 }
 
-const DisplayResults = ({
-    currResult,
-    onUserCardClicked,
-}: DisplayResultsProps) => {
+const DisplayResults = ({ onUserCardClicked }: DisplayResultsProps) => {
+    const { currResult } = useBank();
+
     const handleDisplay = () => {
         if (Array.isArray(currResult)) {
             return currResult.map((user) => {

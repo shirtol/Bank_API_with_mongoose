@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useBank } from "../../context/bank.context";
+import Button from "../button/Button";
 import { StyledInput } from "../input/StyledInput";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-interface InputBarProps {
-    requestedInputs: string[];
-}
-
-interface InputObj {
+export interface InputObj {
     [key: string]: string | number;
     ["user id"]: string;
     name: string;
@@ -16,9 +14,10 @@ interface InputObj {
     amount: string;
 }
 
-const InputBar = ({ requestedInputs }: InputBarProps) => {
+const InputBar = () => {
+    const { requestedData, currEndpoint, currReqType } = useBank();
     const [inputBarTerms, setInputBarTerms] = useState<Partial<InputObj>>(
-        requestedInputs.reduce((acc: Partial<InputObj>, curr: string) => {
+        requestedData!.reduce((acc: Partial<InputObj>, curr: string) => {
             return { ...acc, [curr]: "" };
         }, {})
     );
@@ -27,8 +26,10 @@ const InputBar = ({ requestedInputs }: InputBarProps) => {
         setInputBarTerms({ ...inputBarTerms, [inputStr]: value });
     };
 
+    const sendRequest = () => {};
+
     const renderInputs = () => {
-        return requestedInputs.map((inputStr) => {
+        return requestedData!.map((inputStr) => {
             return (
                 <StyledInput
                     key={inputStr}
@@ -40,7 +41,12 @@ const InputBar = ({ requestedInputs }: InputBarProps) => {
         });
     };
 
-    return <StyledFlexWrapper>{renderInputs()}</StyledFlexWrapper>;
+    return (
+        <StyledFlexWrapper>
+            <StyledFlexWrapper>{renderInputs()}</StyledFlexWrapper>
+            <Button onBtnClicked={sendRequest} title={"Submit"}></Button>
+        </StyledFlexWrapper>
+    );
 };
 
 export default InputBar;

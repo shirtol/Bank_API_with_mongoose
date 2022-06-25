@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactJson from "react-json-view";
+import { useBank } from "../../context/bank.context";
 import { User } from "../../types/types";
 import DepositCash from "../depositCash/DepositCash";
 import DisplayResults from "../displayResults/DisplayResults";
@@ -11,27 +12,16 @@ import ResultsView from "../resultsView/ResultsView";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
 const Bank = () => {
-    const [currResult, setCurrResult] = useState<User | User[]>();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState<User>();
-    const [requestedData, setRequestedData] = useState<string[]>([]);
+    const { setIsModalOpen, setSelectedUser, requestedData } = useBank();
 
     const onUserCardClicked = (user: User) => {
         setIsModalOpen(true);
         setSelectedUser(user);
     };
 
-    const openInputBar = (requestedInput: string[]) => {
-        setRequestedData(requestedInput);
-    };
-
     return (
         <>
-            <Modal
-                isShown={isModalOpen}
-                onCloseModal={() => setIsModalOpen(false)}
-                user={selectedUser}
-            ></Modal>
+            <Modal></Modal>
             <StyledFlexWrapper
                 childWidth="50%"
                 // marginTop="2rem"
@@ -40,17 +30,14 @@ const Bank = () => {
                 marginTop="2rem"
             >
                 <StyledFlexWrapper>
-                    <GetAllUsers setResults={setCurrResult}></GetAllUsers>
-                    <GetUser
-                        setResults={setCurrResult}
-                        openInputBar={openInputBar}
-                    ></GetUser>
+                    <GetAllUsers></GetAllUsers>
+                    <GetUser></GetUser>
                     <DepositCash></DepositCash>
                 </StyledFlexWrapper>
 
                 {requestedData.length > 0 && (
                     <StyledFlexWrapper>
-                        <InputBar requestedInputs={requestedData}></InputBar>
+                        <InputBar></InputBar>
                     </StyledFlexWrapper>
                 )}
 
@@ -60,7 +47,6 @@ const Bank = () => {
                     overflowY="scroll"
                 >
                     <DisplayResults
-                        currResult={currResult}
                         onUserCardClicked={onUserCardClicked}
                     ></DisplayResults>
                 </StyledFlexWrapper>
