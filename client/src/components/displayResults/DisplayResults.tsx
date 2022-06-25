@@ -1,5 +1,6 @@
 import React from "react";
 import { User } from "../../types/types";
+import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
 import UserAccountCard from "../userAccountCard/UserAccountCard";
 
 interface DisplayResultsProps {
@@ -10,12 +11,17 @@ const DisplayResults = ({ currResult }: DisplayResultsProps) => {
     const handleDisplay = () => {
         if (Array.isArray(currResult)) {
             return currResult.map((user) => {
-                return <UserAccountCard user={user}></UserAccountCard>;
+                return (
+                    <UserAccountCard
+                        user={user}
+                        key={user.userId}
+                    ></UserAccountCard>
+                );
             });
         }
     };
 
-    return <div>{handleDisplay()}</div>;
+    return <StyledGridWrapper>{handleDisplay()}</StyledGridWrapper>;
 };
 
 export default DisplayResults;

@@ -1,7 +1,7 @@
 import React from "react";
 import { User } from "../../types/types";
 import DisplayUserAccounts from "../displayUserAccounts/DisplayUserAccounts";
-import { StyledId } from "../styledId/StyledId";
+import { StyledUserDetails } from "../styledUserDetails/StyledUserDetails";
 import { StyledName } from "../styledName/StyledName";
 
 interface UserAccountCardProps {
@@ -10,13 +10,14 @@ interface UserAccountCardProps {
 
 const UserAccountCard = ({ user }: UserAccountCardProps) => {
     return (
-        <>
+        <div>
             <StyledName>{user.userName}</StyledName>
-            <StyledId>{user.userId}</StyledId>
-            <DisplayUserAccounts
+            <StyledUserDetails>{user.email}</StyledUserDetails>
+            <StyledUserDetails>{user.phone}</StyledUserDetails>
+            {/* <DisplayUserAccounts
                 userAccounts={user.accounts}
-            ></DisplayUserAccounts>
-        </>
+            ></DisplayUserAccounts> */}
+        </div>
     );
 };
 

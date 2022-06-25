@@ -1,7 +1,7 @@
 import React from "react";
 import { Account } from "../../types/types";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
-import { StyledId } from "../styledId/StyledId";
+import { StyledUserDetails } from "../styledUserDetails/StyledUserDetails";
 
 interface DisplayUserAccountsProps {
     userAccounts: Account[];
@@ -12,7 +12,7 @@ const DisplayUserAccounts = ({ userAccounts }: DisplayUserAccountsProps) => {
         return userAccounts.map((account) => {
             return (
                 <StyledFlexWrapper>
-                    <StyledId></StyledId>
+                    <StyledUserDetails></StyledUserDetails>
                     <h2>Cash: {account.cash}</h2>
                     <h2>Credit: {account.credit}</h2>
                     <h2>Is Active: {account.isActive.toString()}</h2>
