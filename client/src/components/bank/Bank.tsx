@@ -12,9 +12,11 @@ import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 const Bank = () => {
     const [currResult, setCurrResult] = useState<User | User[]>();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState<User>();
 
-    const onUserCardClicked = () => {
+    const onUserCardClicked = (user: User) => {
         setIsModalOpen(true);
+        setSelectedUser(user);
     };
 
     return (
@@ -22,6 +24,7 @@ const Bank = () => {
             <Modal
                 isShown={isModalOpen}
                 onCloseModal={() => setIsModalOpen(false)}
+                user={selectedUser}
             ></Modal>
             <StyledFlexWrapper
                 childWidth="50%"

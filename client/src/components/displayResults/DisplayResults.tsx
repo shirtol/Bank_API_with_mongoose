@@ -5,7 +5,7 @@ import UserAccountCard from "../userAccountCard/UserAccountCard";
 
 interface DisplayResultsProps {
     currResult: User | User[] | undefined;
-    onUserCardClicked: () => void;
+    onUserCardClicked: (user: User) => void;
 }
 
 const DisplayResults = ({

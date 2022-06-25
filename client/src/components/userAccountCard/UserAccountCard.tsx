@@ -7,18 +7,15 @@ import { StyledCard } from "../styledCard/StyledCard";
 
 interface UserAccountCardProps {
     user: User;
-    onUserCardClicked: () => void;
+    onUserCardClicked: (user: User) => void;
 }
 
 const UserAccountCard = ({ user, onUserCardClicked }: UserAccountCardProps) => {
     return (
-        <StyledCard onClick={onUserCardClicked}>
+        <StyledCard onClick={() => onUserCardClicked(user)}>
             <StyledName>{user.userName}</StyledName>
             <StyledUserDetails>{user.email}</StyledUserDetails>
             <StyledUserDetails>{user.phone}</StyledUserDetails>
-            {/* <DisplayUserAccounts
-                userAccounts={user.accounts}
-            ></DisplayUserAccounts> */}
         </StyledCard>
     );
 };
