@@ -9,6 +9,8 @@ import { StyledModalWrapper } from "../styledModalWrapper/StyledModalWrapper";
 const Modal = () => {
     const { isModalOpen, selectedUser, setIsModalOpen } = useBank();
 
+    console.log(selectedUser);
+
     return (
         <>
             {isModalOpen && (
@@ -20,6 +22,7 @@ const Modal = () => {
                         ></StyledIcon>
                         <DisplayUserAccounts
                             userAccounts={selectedUser!.accounts}
+                            userId={selectedUser!.userId}
                         ></DisplayUserAccounts>
                     </StyledModal>
                 </StyledModalWrapper>

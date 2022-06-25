@@ -36,7 +36,11 @@ const DisplayResults = ({ onUserCardClicked }: DisplayResultsProps) => {
         }
     };
 
-    return <StyledGridWrapper>{handleDisplay()}</StyledGridWrapper>;
+    return (
+        <StyledGridWrapper overflowY="visible">
+            {handleDisplay()}
+        </StyledGridWrapper>
+    );
 };
 
 export default DisplayResults;
