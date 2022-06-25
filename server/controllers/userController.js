@@ -1,10 +1,4 @@
-import { v4 as uuid } from "uuid";
 import { UPDATE_TYPE_CREDIT, UPDATE_TYPE_CASH } from "../consts.js";
-import {
-    loadJson,
-    getUsersAndAccountsJson,
-    saveToJson,
-} from "../utils/jsonUtils.js";
 import {
     updateAccounts,
     getRequestedAccount,

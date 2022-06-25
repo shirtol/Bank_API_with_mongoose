@@ -1,8 +1,3 @@
-import {
-    getUsersAndAccountsJson,
-    loadJson,
-    saveToJson,
-} from "../utils/jsonUtils.js";
 import { getUserData } from "../controllers/userController.js";
 import { UPDATE_TYPE_CASH } from "../consts.js";
 import { Account } from "../models/account/Account.models.js";
