@@ -1,22 +1,22 @@
 import React from "react";
 import { User } from "../../types/types";
 import DisplayUserAccounts from "../displayUserAccounts/DisplayUserAccounts";
-import { StyledId } from "../styledId/StyledId";
+import { StyledUserDetails } from "../styledUserDetails/StyledUserDetails";
 import { StyledName } from "../styledName/StyledName";
+import { StyledCard } from "../styledCard/StyledCard";
 
 interface UserAccountCardProps {
     user: User;
+    onUserCardClicked: (user: User) => void;
 }
 
-const UserAccountCard = ({ user }: UserAccountCardProps) => {
+const UserAccountCard = ({ user, onUserCardClicked }: UserAccountCardProps) => {
     return (
-        <>
+        <StyledCard onClick={() => onUserCardClicked(user)}>
             <StyledName>{user.userName}</StyledName>
-            <StyledId>{user.userId}</StyledId>
-            <DisplayUserAccounts
-                userAccounts={user.accounts}
-            ></DisplayUserAccounts>
-        </>
+            <StyledUserDetails>{user.email}</StyledUserDetails>
+            <StyledUserDetails>{user.phone}</StyledUserDetails>
+        </StyledCard>
     );
 };
 

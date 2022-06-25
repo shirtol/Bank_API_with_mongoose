@@ -26,6 +26,8 @@ export const getUserData = async (id) => {
     const userData = {
         userId: requestedUser._id,
         userName: requestedUser.name,
+        phone: requestedUser.phone,
+        email: requestedUser.email,
         accounts: userAccountsData,
     };
 
@@ -54,9 +56,14 @@ const createNewAccount = (newUserId) => {
     };
 };
 
-export const addNewUser = async ({ name }) => {
+export const addNewUser = async ({ name, email, phone }) => {
+    if (User.find({ email }) || User.find({ phone })) {
+        throw Error("This user already exist!");
+    }
     const newUser = new User({
-        name: name,
+        name,
+        email,
+        phone,
     });
     const newAccount = new Account(createNewAccount(newUser._id));
     newUser.accounts.push(newAccount._id);

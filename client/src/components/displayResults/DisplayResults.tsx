@@ -1,21 +1,38 @@
 import React from "react";
+import { useBank } from "../../context/bank.context";
 import { User } from "../../types/types";
+import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
 import UserAccountCard from "../userAccountCard/UserAccountCard";
 
 interface DisplayResultsProps {
-    currResult: User | User[] | undefined;
+    onUserCardClicked: (user: User) => void;
 }
 
-const DisplayResults = ({ currResult }: DisplayResultsProps) => {
+const DisplayResults = ({ onUserCardClicked }: DisplayResultsProps) => {
+    const { currResult } = useBank();
+
     const handleDisplay = () => {
         if (Array.isArray(currResult)) {
             return currResult.map((user) => {
-                return <UserAccountCard user={user}></UserAccountCard>;
+                return (
+                    <UserAccountCard
+                        onUserCardClicked={onUserCardClicked}
+                        user={user}
+                        key={user.userId}
+                    ></UserAccountCard>
+                );
             });
+        } else {
+            return (
+                <UserAccountCard
+                    onUserCardClicked={onUserCardClicked}
+                    user={currResult}
+                ></UserAccountCard>
+            );
         }
     };
 
-    return <div>{handleDisplay()}</div>;
+    return <StyledGridWrapper>{handleDisplay()}</StyledGridWrapper>;
 };
 
 export default DisplayResults;
