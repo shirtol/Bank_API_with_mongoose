@@ -39,6 +39,8 @@ const InputBar = () => {
     };
 
     const sendRequest = async () => {
+        console.log(inputBarTerms);
+
         try {
             const data = await fetchData(
                 currEndpoint,

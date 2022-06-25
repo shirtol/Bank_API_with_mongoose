@@ -12,30 +12,27 @@ interface DisplayResultsProps {
 const DisplayResults = ({ onUserCardClicked }: DisplayResultsProps) => {
     const { currResult, currEndpoint } = useBank();
 
+    const renderUserCard = (user: User) => {
+        return (
+            <UserAccountCard
+                onUserCardClicked={onUserCardClicked}
+                user={user}
+                key={user.userId}
+            ></UserAccountCard>
+        );
+    };
+
+    const renderAccountCard = (account: Account) => {
+        return <AccountCard account={account}></AccountCard>;
+    };
+
     const handleDisplay = () => {
         if (Array.isArray(currResult)) {
-            console.log(currEndpoint);
-
             return currEndpoint.includes("transfer")
-                ? (currResult as Account[]).map((account: Account) => {
-                      return <AccountCard account={account}></AccountCard>;
-                  })
-                : (currResult as User[]).map((user: User) => {
-                      return (
-                          <UserAccountCard
-                              onUserCardClicked={onUserCardClicked}
-                              user={user}
-                              key={user.userId}
-                          ></UserAccountCard>
-                      );
-                  });
+                ? (currResult as Account[]).map(renderAccountCard)
+                : (currResult as User[]).map(renderUserCard);
         } else {
-            return (
-                <UserAccountCard
-                    onUserCardClicked={onUserCardClicked}
-                    user={currResult as User}
-                ></UserAccountCard>
-            );
+            return renderUserCard(currResult as User);
         }
     };
 

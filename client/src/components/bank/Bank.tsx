@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactJson from "react-json-view";
 import { useBank } from "../../context/bank.context";
 import { User } from "../../types/types";
+import AddUser from "../addUser/AddUser";
 import DepositCash from "../depositCash/DepositCash";
 import DisplayResults from "../displayResults/DisplayResults";
 import GetAllUsers from "../getAllUsers/GetAllUsers";
@@ -45,6 +46,7 @@ const Bank = () => {
                     <WithdrawCredit></WithdrawCredit>
                     <TransferMoneyCash></TransferMoneyCash>
                     <TransferMoneyCredit></TransferMoneyCredit>
+                    <AddUser></AddUser>
                 </StyledGridWrapper>
 
                 {requestedData.length > 0 && (

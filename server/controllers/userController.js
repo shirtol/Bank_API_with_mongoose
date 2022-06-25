@@ -57,7 +57,10 @@ const createNewAccount = (newUserId) => {
 };
 
 export const addNewUser = async ({ name, email, phone }) => {
-    if (User.find({ email }) || User.find({ phone })) {
+    if (
+        (await User.findOne({ email: email })) ||
+        (await User.findOne({ phone: phone }))
+    ) {
         throw Error("This user already exist!");
     }
     const newUser = new User({
@@ -70,7 +73,7 @@ export const addNewUser = async ({ name, email, phone }) => {
     const savedAccount = await newAccount.save();
     const savedUser = await newUser.save();
 
-    return { savedUser, savedAccount };
+    return getUserData(newUser._id);
 };
 
 export const depositCash = async ({ accountId, amount }, userId) => {
