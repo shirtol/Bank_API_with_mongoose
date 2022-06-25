@@ -1,4 +1,3 @@
-import { getUsersAndAccountsJson } from "../utils/jsonUtils.js";
 import { isNumberOrThrow, isBoolOrThrow } from "../utils/utils.js";
 import { Account } from "../models/account/Account.models.js";
 
@@ -9,9 +8,4 @@ export const filterByAmount = async ({ threshold, isAbove }, filterBy) => {
     return isAbove
         ? await Account.find({ [filterBy]: { $gte: threshold } })
         : await Account.find({ [filterBy]: { $lt: threshold } });
-    // if (isAbove) {
-    //     return await Account.find({ [filterBy]: { $gte: threshold } });
-    // } else {
-    //     return await Account.find({ filterBy: { $lt: threshold } });
-    // }
 };

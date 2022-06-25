@@ -1,7 +1,6 @@
 import { getAccount } from "../utils/accountUtils.js";
 
 export const accountActiveValidation = async (req, res, next) => {
-    // const isActive = req?.body?.isActive;
     const accountId = req?.body?.accountId;
     const destinationAccountId = req?.body?.destinationAccountId;
     const account = await getAccount(accountId);
@@ -9,7 +8,6 @@ export const accountActiveValidation = async (req, res, next) => {
     if (account) {
         if (!account.isActive) {
             return res.status(400).send("Account isn't active");
-            // throw Error("Account isn't active");
         }
     }
     if (destAccount) {

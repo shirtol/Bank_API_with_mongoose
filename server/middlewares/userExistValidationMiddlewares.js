@@ -1,4 +1,3 @@
-import { getUsersAndAccountsJson } from "../utils/jsonUtils.js";
 import { User } from "../models/user/User.models.js";
 
 export const userExistValidation = async (req, res, next) => {
