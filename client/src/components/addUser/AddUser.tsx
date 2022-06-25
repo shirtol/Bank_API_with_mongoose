@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useBank } from "../../context/bank.context";
-import { getUser } from "../../networkUtils/networkUtils";
-import { User } from "../../types/types";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-const GetUser = () => {
-    const fetchUser = async () => {
-        // const user = await getUser(term);
-        // setResults(user);
-    };
+const AddUser = () => {
     const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
         useBank();
 
     const openInputBar = (requestedInput: string[]) => {
         setCurrResult([]);
         setRequestedData(requestedInput);
-        setCurrEndpoint("/user");
-        setCurrReqType("get");
+        setCurrEndpoint("/users");
+        setCurrReqType("post");
     };
 
     return (
         <StyledFlexWrapper>
             <Button
-                onBtnClicked={() => openInputBar(["user id"])}
-                title="get user"
+                onBtnClicked={() => openInputBar(["name", "email", "phone"])}
+                title="Add New User"
             ></Button>
         </StyledFlexWrapper>
     );
 };
 
-export default GetUser;
+export default AddUser;

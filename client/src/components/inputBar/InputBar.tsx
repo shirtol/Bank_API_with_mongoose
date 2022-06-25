@@ -11,7 +11,7 @@ export interface InputObj {
     name: string;
     email: string;
     phone: string;
-    ["account id"]: string;
+    accountId: string;
     amount: string;
 }
 
@@ -24,23 +24,44 @@ const InputBar = () => {
         }, {})
     );
 
+    useEffect(() => {
+        setInputBarTerms(
+            requestedData!.reduce((acc: Partial<InputObj>, curr: string) => {
+                return { ...acc, [curr]: "" };
+            }, {})
+        );
+    }, [requestedData]);
+
     const onInputChange = (value: string, inputStr: string) => {
+        console.log(inputStr);
+
         setInputBarTerms({ ...inputBarTerms, [inputStr]: value });
     };
 
     const sendRequest = async () => {
-        const data = await fetchData(currEndpoint, currReqType, inputBarTerms);
-        setCurrResult(data);
-        console.log(data);
+        console.log(inputBarTerms);
+
+        try {
+            const data = await fetchData(
+                currEndpoint,
+                currReqType,
+                inputBarTerms
+            );
+            setCurrResult(data);
+            console.log(data);
+        } catch (err: any) {
+            console.log(err.response);
+        }
     };
 
     const renderInputs = () => {
         return requestedData!.map((inputStr) => {
             return (
                 <StyledInput
+                    type={inputStr === "amount" ? "number" : "text"}
                     key={inputStr}
                     placeholder={inputStr}
-                    value={inputBarTerms![inputStr]}
+                    value={inputBarTerms![inputStr] ?? ""}
                     onChange={(e) => onInputChange(e.target.value, inputStr)}
                 ></StyledInput>
             );
@@ -49,7 +70,9 @@ const InputBar = () => {
 
     return (
         <StyledFlexWrapper>
-            <StyledFlexWrapper>{renderInputs()}</StyledFlexWrapper>
+            <StyledFlexWrapper flexDirection="column">
+                {renderInputs()}
+            </StyledFlexWrapper>
             <Button onBtnClicked={sendRequest} title={"Submit"}></Button>
         </StyledFlexWrapper>
     );

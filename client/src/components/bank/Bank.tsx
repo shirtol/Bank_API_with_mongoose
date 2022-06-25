@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactJson from "react-json-view";
 import { useBank } from "../../context/bank.context";
 import { User } from "../../types/types";
+import AddUser from "../addUser/AddUser";
 import DepositCash from "../depositCash/DepositCash";
 import DisplayResults from "../displayResults/DisplayResults";
 import GetAllUsers from "../getAllUsers/GetAllUsers";
@@ -10,6 +11,11 @@ import InputBar from "../inputBar/InputBar";
 import Modal from "../modal/Modal";
 import ResultsView from "../resultsView/ResultsView";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
+import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
+import TransferMoneyCash from "../transferMoneyCash/TransferMoneyCash";
+import TransferMoneyCredit from "../transferMoneyCredit/TransferMoneyCredit";
+import WithdrawCash from "../withdrawCash/WithdrawCash";
+import WithdrawCredit from "../withdrawCredit/WithdrawCredit";
 
 const Bank = () => {
     const { setIsModalOpen, setSelectedUser, requestedData } = useBank();
@@ -29,11 +35,19 @@ const Bank = () => {
                 justifyContent="flex-start"
                 marginTop="2rem"
             >
-                <StyledFlexWrapper>
+                <StyledGridWrapper
+                    gridTemplateCol="repeat(4, 1fr)"
+                    overflowY="visible"
+                >
                     <GetAllUsers></GetAllUsers>
                     <GetUser></GetUser>
                     <DepositCash></DepositCash>
-                </StyledFlexWrapper>
+                    <WithdrawCash></WithdrawCash>
+                    <WithdrawCredit></WithdrawCredit>
+                    <TransferMoneyCash></TransferMoneyCash>
+                    <TransferMoneyCredit></TransferMoneyCredit>
+                    <AddUser></AddUser>
+                </StyledGridWrapper>
 
                 {requestedData.length > 0 && (
                     <StyledFlexWrapper>

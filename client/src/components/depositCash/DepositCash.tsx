@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useBank } from "../../context/bank.context";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-interface DepositCashProps {}
+const DepositCash = () => {
+    const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
+        useBank();
 
-const DepositCash = ({}: DepositCashProps) => {
-    const depositCash = () => {};
+    const openInputBar = (requestedInput: string[]) => {
+        setCurrResult([]);
+        setRequestedData(requestedInput);
+        setCurrEndpoint("/user/cash/deposit");
+        setCurrReqType("put");
+    };
 
     return (
         <StyledFlexWrapper>
-            <Button onBtnClicked={depositCash} title="Deposit cash"></Button>
-            {/* <Input placeholder="enter amount to deposit" value={amount} onInputChange={setAmount}></Input> */}
+            <Button
+                onBtnClicked={() =>
+                    openInputBar(["user id", "accountId", "amount"])
+                }
+                title="Deposit cash"
+            ></Button>
         </StyledFlexWrapper>
     );
 };

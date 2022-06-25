@@ -1,34 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useBank } from "../../context/bank.context";
-import { getUser } from "../../networkUtils/networkUtils";
-import { User } from "../../types/types";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-const GetUser = () => {
-    const fetchUser = async () => {
-        // const user = await getUser(term);
-        // setResults(user);
-    };
+const TransferMoneyCredit = () => {
     const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
         useBank();
 
     const openInputBar = (requestedInput: string[]) => {
         setCurrResult([]);
         setRequestedData(requestedInput);
-        setCurrEndpoint("/user");
-        setCurrReqType("get");
+        setCurrEndpoint("/user/credit/transfer");
+        setCurrReqType("put");
     };
 
     return (
         <StyledFlexWrapper>
             <Button
-                onBtnClicked={() => openInputBar(["user id"])}
-                title="get user"
+                onBtnClicked={() =>
+                    openInputBar([
+                        "user id",
+                        "accountId",
+                        "destinationAccountId",
+                        "amount",
+                    ])
+                }
+                title="Transfer Credit Money"
             ></Button>
         </StyledFlexWrapper>
     );
 };
 
-export default GetUser;
+export default TransferMoneyCredit;
