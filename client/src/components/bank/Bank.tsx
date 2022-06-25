@@ -10,6 +10,9 @@ import InputBar from "../inputBar/InputBar";
 import Modal from "../modal/Modal";
 import ResultsView from "../resultsView/ResultsView";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
+import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
+import WithdrawCash from "../withdrawCash/WithdrawCash";
+import WithdrawCredit from "../withdrawCredit/WithdrawCredit";
 
 const Bank = () => {
     const { setIsModalOpen, setSelectedUser, requestedData } = useBank();
@@ -29,11 +32,16 @@ const Bank = () => {
                 justifyContent="flex-start"
                 marginTop="2rem"
             >
-                <StyledFlexWrapper>
+                <StyledGridWrapper
+                    gridTemplateCol="repeat(4, 1fr)"
+                    overflowY="visible"
+                >
                     <GetAllUsers></GetAllUsers>
                     <GetUser></GetUser>
                     <DepositCash></DepositCash>
-                </StyledFlexWrapper>
+                    <WithdrawCash></WithdrawCash>
+                    <WithdrawCredit></WithdrawCredit>
+                </StyledGridWrapper>
 
                 {requestedData.length > 0 && (
                     <StyledFlexWrapper>

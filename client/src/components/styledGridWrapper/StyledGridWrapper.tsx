@@ -5,6 +5,7 @@ interface StyledGridWrapperProps {
     gridTemplateCol?: string;
     alignSelf?: string;
     children: ReactNode;
+    overflowY?: string;
 }
 
 export const StyledGridWrapper = styled.div<StyledGridWrapperProps>`
@@ -16,7 +17,7 @@ export const StyledGridWrapper = styled.div<StyledGridWrapperProps>`
     padding: 2rem;
     grid-auto-rows: 1fr;
     height: max-content;
-    overflow-y: scroll;
+    overflow-y: ${(props) => props.overflowY ?? "scroll"};
     width: 90%;
     align-self: ${(props) => props.alignSelf ?? "center"};
 `;

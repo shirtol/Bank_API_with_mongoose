@@ -7,13 +7,10 @@ import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 const DepositCash = () => {
     const { setRequestedData, setCurrEndpoint, setCurrReqType } = useBank();
 
-    useEffect(() => {
-        setCurrEndpoint("/user/cash/deposit");
-        setCurrReqType("put");
-    }, []);
-
     const openInputBar = (requestedInput: string[]) => {
         setRequestedData(requestedInput);
+        setCurrEndpoint("/user/cash/deposit");
+        setCurrReqType("put");
     };
 
     return (

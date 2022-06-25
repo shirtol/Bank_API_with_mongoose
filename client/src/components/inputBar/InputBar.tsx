@@ -24,6 +24,14 @@ const InputBar = () => {
         }, {})
     );
 
+    useEffect(() => {
+        setInputBarTerms(
+            requestedData!.reduce((acc: Partial<InputObj>, curr: string) => {
+                return { ...acc, [curr]: "" };
+            }, {})
+        );
+    }, [requestedData]);
+
     const onInputChange = (value: string, inputStr: string) => {
         console.log(inputStr);
 
@@ -51,7 +59,7 @@ const InputBar = () => {
                     type={inputStr === "amount" ? "number" : "text"}
                     key={inputStr}
                     placeholder={inputStr}
-                    value={inputBarTerms![inputStr]}
+                    value={inputBarTerms![inputStr] ?? ""}
                     onChange={(e) => onInputChange(e.target.value, inputStr)}
                 ></StyledInput>
             );

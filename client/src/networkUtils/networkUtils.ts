@@ -22,6 +22,8 @@ export const fetchData = async (
     method: string,
     reqBody: Partial<InputObj>
 ) => {
+    console.log(reqBody);
+
     const adaptedReqBody = {
         ...reqBody,
         amount: parseInt(reqBody.amount ?? "0"),
