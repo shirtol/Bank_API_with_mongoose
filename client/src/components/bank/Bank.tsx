@@ -19,7 +19,10 @@ const Bank = () => {
 
     return (
         <>
-            <Modal isShown={isModalOpen}></Modal>
+            <Modal
+                isShown={isModalOpen}
+                onCloseModal={() => setIsModalOpen(false)}
+            ></Modal>
             <StyledFlexWrapper
                 childWidth="50%"
                 // marginTop="2rem"

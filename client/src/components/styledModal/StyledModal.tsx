@@ -1,6 +1,11 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 
-export const StyledModal = styled.div`
+interface StyledModalProps {
+    children?: ReactNode;
+}
+
+export const StyledModal = styled.div<StyledModalProps>`
     width: 40%;
     height: 65%;
     background-color: #f6f6f6;
@@ -13,7 +18,7 @@ export const StyledModal = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    position: sticky;
+    position: relative;
     font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     text-align: center;
