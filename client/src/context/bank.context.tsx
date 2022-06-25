@@ -5,14 +5,14 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import { User } from "../types/types";
+import { Account, User } from "../types/types";
 
 interface BankProviderProps {
     children: ReactNode;
 }
 
 interface BankContextValue {
-    currResult: User | User[];
+    currResult: User | User[] | Account | Account[];
     setCurrResult: (user: User | User[]) => void;
     isModalOpen: boolean;
     setIsModalOpen: (isOpen: boolean) => void;

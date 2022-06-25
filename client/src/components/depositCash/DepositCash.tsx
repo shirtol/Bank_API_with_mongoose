@@ -5,9 +5,11 @@ import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
 const DepositCash = () => {
-    const { setRequestedData, setCurrEndpoint, setCurrReqType } = useBank();
+    const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
+        useBank();
 
     const openInputBar = (requestedInput: string[]) => {
+        setCurrResult([]);
         setRequestedData(requestedInput);
         setCurrEndpoint("/user/cash/deposit");
         setCurrReqType("put");

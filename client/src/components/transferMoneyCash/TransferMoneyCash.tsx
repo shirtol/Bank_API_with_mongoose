@@ -4,14 +4,14 @@ import Button from "../button/Button";
 import Input from "../input/Input";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 
-const WithdrawCash = () => {
+const TransferMoneyCash = () => {
     const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
         useBank();
 
     const openInputBar = (requestedInput: string[]) => {
         setCurrResult([]);
         setRequestedData(requestedInput);
-        setCurrEndpoint("/user/cash/withdraw");
+        setCurrEndpoint("/user/cash/transfer");
         setCurrReqType("put");
     };
 
@@ -19,12 +19,17 @@ const WithdrawCash = () => {
         <StyledFlexWrapper>
             <Button
                 onBtnClicked={() =>
-                    openInputBar(["user id", "accountId", "amount"])
+                    openInputBar([
+                        "user id",
+                        "accountId",
+                        "destinationAccountId",
+                        "amount",
+                    ])
                 }
-                title="Withdraw cash"
+                title="Transfer Cash Money"
             ></Button>
         </StyledFlexWrapper>
     );
 };
 
-export default WithdrawCash;
+export default TransferMoneyCash;

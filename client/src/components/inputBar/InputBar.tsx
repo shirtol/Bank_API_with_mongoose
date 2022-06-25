@@ -68,7 +68,9 @@ const InputBar = () => {
 
     return (
         <StyledFlexWrapper>
-            <StyledFlexWrapper>{renderInputs()}</StyledFlexWrapper>
+            <StyledFlexWrapper flexDirection="column">
+                {renderInputs()}
+            </StyledFlexWrapper>
             <Button onBtnClicked={sendRequest} title={"Submit"}></Button>
         </StyledFlexWrapper>
     );

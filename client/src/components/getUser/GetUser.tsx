@@ -11,9 +11,11 @@ const GetUser = () => {
         // const user = await getUser(term);
         // setResults(user);
     };
-    const { setRequestedData, setCurrEndpoint, setCurrReqType } = useBank();
+    const { setRequestedData, setCurrEndpoint, setCurrReqType, setCurrResult } =
+        useBank();
 
     const openInputBar = (requestedInput: string[]) => {
+        setCurrResult([]);
         setRequestedData(requestedInput);
         setCurrEndpoint("/user");
         setCurrReqType("get");

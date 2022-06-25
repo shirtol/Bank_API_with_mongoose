@@ -11,6 +11,7 @@ import Modal from "../modal/Modal";
 import ResultsView from "../resultsView/ResultsView";
 import { StyledFlexWrapper } from "../styledFlexWrapper/StyledFlexWrapper";
 import { StyledGridWrapper } from "../styledGridWrapper/StyledGridWrapper";
+import TransferMoneyCash from "../transferMoneyCash/TransferMoneyCash";
 import WithdrawCash from "../withdrawCash/WithdrawCash";
 import WithdrawCredit from "../withdrawCredit/WithdrawCredit";
 
@@ -41,6 +42,7 @@ const Bank = () => {
                     <DepositCash></DepositCash>
                     <WithdrawCash></WithdrawCash>
                     <WithdrawCredit></WithdrawCredit>
+                    <TransferMoneyCash></TransferMoneyCash>
                 </StyledGridWrapper>
 
                 {requestedData.length > 0 && (
